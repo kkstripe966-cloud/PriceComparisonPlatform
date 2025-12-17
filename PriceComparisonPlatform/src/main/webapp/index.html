@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>比价平台 - 用户登录注册</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .verification-code {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+        }
+
+        .send-code-btn {
+            white-space: nowrap;
+            padding: 12px 20px;
+            background: #4CAF50;
+        }
+
+        .api-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .api-info h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .api-list {
+            list-style: none;
+        }
+
+        .api-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .api-list li:last-child {
+            border-bottom: none;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .get { background: #61affe; color: white; }
+        .post { background: #49cc90; color: white; }
+
+        .response {
+            background: #f5f5f5;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+
+        .toggle-form {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .toggle-form a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toggle-form a:hover {
+            text-decoration: underline;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+
+        .notification.error {
+            background: #f44336;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="notification" id="notification"></div>
+
+<div class="container">
+    <div class="header">
+        <h1>🛍️ 比价平台</h1>
+        <p>全网比价，购物更省心 | 后端接口测试页面</p>
+    </div>
+
+    <!-- 登录卡片 -->
+    <div class="card" id="login-card">
+        <h2>用户登录</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login-username">用户名（手机号/邮箱）</label>
+                <input type="text" id="login-username" class="form-control" placeholder="请输入手机号或邮箱" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label for="login-password">密码</label>
+                <input type="password" id="login-password" class="form-control" placeholder="请输入密码" required="required" />
+            </div>
+
+            <button type="submit" class="btn">登录</button>
+
+            <div class="toggle-form">
+                还没有账号？ <a href="#" onclick="showRegister(); return false;">立即注册</a>
+            </div>
+        </form>
+
+        <div class="api-info">
+            <h3>登录接口信息</h3>
+            <ul class="api-list">
+                <li><span class="method post">POST</span> /api/user/login</li>
+                <li><strong>参数：</strong>username, password</li>
+                <li><strong>响应示例：</strong></li>
+            </ul>
+            <div class="response">
+                {
+                "success": true,
+                "message": "登录成功",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                "userInfo": {
+                "id": 1,
+                "phone": "13800138000",
+                "email": "user@example.com",
+                "nickname": "用户3800"
+                }
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册卡片 -->
+    <div class="card" id="register-card" style="display: none;">
+        <h2>用户注册</h2>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="register-phone">手机号</label>
+                <input type="tel" id="register-phone" class="form-control" placeholder="请输入手机号" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label for="register-email">邮箱</label>
+                <input type="email" id="register-email" class="form-control" placeholder="请输入邮箱" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label for="register-password">密码</label>
+                <input type="password" id="register-password" class="form-control" placeholder="请输入密码（6-20位）" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label for="register-confirm-password">确认密码</label>
+                <input type="password" id="register-confirm-password" class="form-control" placeholder="请再次输入密码" required="required" />
+            </div>
+
+            <div class="form-group">
+                <label for="verification-code">验证码</label>
+                <div class="verification-code">
+                    <input type="text" id="verification-code" class="form-control" placeholder="请输入验证码" required="required" />
+                    <button type="button" class="btn send-code-btn" onclick="sendVerificationCode()">获取验证码</button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">注册</button>
+
+            <div class="toggle-form">
+                已有账号？ <a href="#" onclick="showLogin(); return false;">立即登录</a>
+            </div>
+        </form>
+
+        <div class="api-info">
+            <h3>注册接口信息</h3>
+            <ul class="api-list">
+                <li><span class="method post">POST</span> /api/user/register</li>
+                <li><strong>参数：</strong>phone, email, password, confirmPassword, code</li>
+                <li><span class="method post">POST</span> /api/user/sendCode</li>
+                <li><strong>参数：</strong>account, type（1-注册，2-登录，3-重置密码）</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // 显示/隐藏登录注册表单
+    function showRegister() {
+        document.getElementById('login-card').style.display = 'none';
+        document.getElementById('register-card').style.display = 'block';
+    }
+
+    function showLogin() {
+        document.getElementById('login-card').style.display = 'block';
+        document.getElementById('register-card').style.display = 'none';
+    }
+
+    // 显示通知
+    function showNotification(message, isError) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.className = 'notification' + (isError ? ' error' : '');
+        notification.style.display = 'block';
+
+        setTimeout(function() {
+            notification.style.display = 'none';
+        }, 3000);
+    }
+
+    // 发送验证码
+    async function sendVerificationCode() {
+        const phone = document.getElementById('register-phone').value;
+        const email = document.getElementById('register-email').value;
+        const account = phone || email;
+
+        if (!account) {
+            showNotification('请输入手机号或邮箱', true);
+            return;
+        }
+
+        try {
+            const response = await fetch('/priceplatform/api/user/sendCode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'account=' + encodeURIComponent(account) + '&amp;type=1'
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                showNotification('验证码发送成功！');
+            } else {
+                showNotification(data.message || '发送失败', true);
+            }
+        } catch (error) {
+            showNotification('网络错误，请稍后重试', true);
+        }
+    }
+
+    // 处理登录
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('login-password').value;
+
+        if (!username || !password) {
+            showNotification('请填写完整的登录信息', true);
+            return;
+        }
+
+        try {
+            const response = await fetch('/priceplatform/api/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'username=' + encodeURIComponent(username) + '&amp;password=' + encodeURIComponent(password)
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                showNotification('登录成功！');
+                console.log('登录成功，token:', data.token);
+                console.log('用户信息:', data.userInfo);
+            } else {
+                showNotification(data.message || '登录失败', true);
+            }
+        } catch (error) {
+            showNotification('网络错误，请稍后重试', true);
+        }
+    });
+
+    // 处理注册
+    document.getElementById('register-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const phone = document.getElementById('register-phone').value;
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        const confirmPassword = document.getElementById('register-confirm-password').value;
+        const code = document.getElementById('verification-code').value;
+
+        if (!phone || !email || !password || !confirmPassword || !code) {
+            showNotification('请填写完整的注册信息', true);
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showNotification('两次输入的密码不一致', true);
+            return;
+        }
+
+        try {
+            const response = await fetch('/priceplatform/api/user/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'phone=' + encodeURIComponent(phone) +
+                    '&amp;email=' + encodeURIComponent(email) +
+                    '&amp;password=' + encodeURIComponent(password) +
+                    '&amp;confirmPassword=' + encodeURIComponent(confirmPassword) +
+                    '&amp;code=' + encodeURIComponent(code)
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                showNotification('注册成功！');
+                console.log('注册成功，token:', data.token);
+                console.log('用户信息:', data.userInfo);
+                // 注册成功后跳转到登录页面
+                setTimeout(showLogin, 1000);
+            } else {
+                showNotification(data.message || '注册失败', true);
+            }
+        } catch (error) {
+            showNotification('网络错误，请稍后重试', true);
+        }
+    });
+
+    // 页面加载时自动测试连接
+    window.addEventListener('load', async function() {
+        try {
+            const response = await fetch('/priceplatform/api/user/test');
+            const data = await response.json();
+            if (data.success) {
+                console.log('后端服务连接正常');
+            }
+        } catch (error) {
+            console.warn('后端服务连接失败，请确保服务已启动');
+        }
+    });
+</script>
+</body>
+</html>
