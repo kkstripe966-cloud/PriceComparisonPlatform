@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>价格对比详情 - 比价平台</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.13/lib/theme-chalk/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.13/lib/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 导航栏 */
+        .nav-bar {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            padding: 8px 16px;
+            background: #409EFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* 商品信息 */
+        .product-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .product-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: #f0f9ff;
+            color: #409EFF;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff5722;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* 最佳选择卡片 */
+        .best-choice-card {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .best-choice-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .best-choice-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .save-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        /* 价格表格 */
+        .price-table-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .price-table th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            color: #666;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .price-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .price-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .platform-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .platform-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .platform-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .platform-name {
+            font-weight: bold;
+        }
+
+        .price-current {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff5722;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .save-amount {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .warning-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .warning-2 {
+            background: #fde2e2;
+            color: #f56c6c;
+        }
+
+        .warning-1 {
+            background: #fdf6ec;
+            color: #e6a23c;
+        }
+
+        .buy-btn {
+            padding: 8px 20px;
+            background: #409EFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .buy-btn:hover {
+            background: #66b1ff;
+        }
+
+        /* 预警提示 */
+        .warning-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .warning-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        /* 智能推荐 */
+        .recommend-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .recommend-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .recommend-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .recommend-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .recommend-image {
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .recommend-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .recommend-content {
+            padding: 15px;
+        }
+
+        .recommend-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .recommend-price {
+            color: #ff5722;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .recommend-reason {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* 优惠建议 */
+        .suggestion-section {
+            background: #f0f9ff;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .suggestion-list {
+            list-style: none;
+        }
+
+        .suggestion-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .suggestion-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* 底部功能区 */
+        .footer-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .refresh-btn {
+            padding: 12px 30px;
+            background: #409EFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .refresh-btn:hover {
+            background: #66b1ff;
+        }
+
+        .update-time {
+            margin-top: 10px;
+            color: #999;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .product-section {
+                flex-direction: column;
+            }
+
+            .product-image {
+                width: 100%;
+                height: 300px;
+            }
+
+            .price-table {
+                font-size: 14px;
+            }
+
+            .price-table th,
+            .price-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="container">
+    <!-- 顶部导航 -->
+    <div class="nav-bar">
+        <div class="nav-content">
+            <button class="back-btn" @click="goBack">← 返回首页</button>
+            <div class="title">{{ product.name }} - 价格对比</div>
+        </div>
+    </div>
+
+    <!-- 商品信息概览 -->
+    <div class="product-section">
+        <div class="product-image">
+            <img :src="product.image || 'https://via.placeholder.com/300'" :alt="product.name">
+        </div>
+        <div class="product-info">
+            <h1 class="product-name">{{ product.name }}</h1>
+            <p class="product-desc">{{ product.description }}</p>
+
+            <div class="tags">
+                <span class="tag" v-for="tag in product.tags" :key="tag">{{ tag }}</span>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value">🔥 {{ product.popularity }}</div>
+                    <div class="stat-label">人气指数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">💰 ¥{{ lowestPrice }}</div>
+                    <div class="stat-label">最低价格</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">{{ priceList.length }}个平台</div>
+                    <div class="stat-label">价格对比</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 最佳选择卡片 -->
+    <div class="best-choice-card" v-if="bestChoice">
+        <div class="best-choice-title">✨ 最佳选择：{{ bestChoice.platformName }}</div>
+        <div class="best-choice-content">
+            <div>
+                <div style="font-size: 28px; font-weight: bold; margin-bottom: 5px;">
+                    ¥{{ bestChoice.finalPrice }}
+                </div>
+                <div>包含配送费 ¥{{ bestChoice.deliveryFee }}</div>
+            </div>
+            <div class="save-badge" v-if="bestChoice.saveAmount > 0">
+                节省 ¥{{ bestChoice.saveAmount }}
+            </div>
+        </div>
+    </div>
+
+    <!-- 价格预警 -->
+    <div class="warning-section" v-if="hasWarning">
+        <div class="warning-title">⚠️ 价格预警</div>
+        <p>{{ warningMessage }}</p>
+    </div>
+
+    <!-- 详细比价表格 -->
+    <div class="price-table-section">
+        <h2 class="section-title">📊 详细价格对比</h2>
+        <table class="price-table">
+            <thead>
+            <tr>
+                <th width="20%">平台</th>
+                <th width="20%">价格</th>
+                <th width="20%">优惠信息</th>
+                <th width="20%">节省金额</th>
+                <th width="20%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="price in priceList" :key="price.id"
+                :style="{'background-color': price.isBestChoice ? '#f0f9ff' : ''}">
+                <td>
+                    <div class="platform-info">
+                        <div class="platform-logo">
+                            <img :src="getPlatformLogo(price.platform)" :alt="price.platformName">
+                        </div>
+                        <div>
+                            <div class="platform-name">{{ price.platformName }}</div>
+                            <div style="font-size: 12px; color: #999;">
+                                评分 {{ price.rating }} · 月销{{ price.salesMonth }}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="price-current">¥{{ price.finalPrice }}</div>
+                    <div class="price-original" v-if="price.originalPrice > price.currentPrice">
+                        原价 ¥{{ price.originalPrice }}
+                    </div>
+                    <div style="font-size: 12px; color: #999;">
+                        配送费 ¥{{ price.deliveryFee }}
+                    </div>
+                </td>
+                <td>
+                    <div>{{ price.couponInfo }}</div>
+                    <div style="font-size: 12px; color: #4caf50;" v-if="price.discount">
+                        {{ (price.discount * 100).toFixed(0) }}折优惠
+                    </div>
+                </td>
+                <td>
+                    <div class="save-amount" v-if="price.saveAmount > 0">
+                        节省 ¥{{ price.saveAmount }}
+                    </div>
+                    <div v-if="price.warningLevel > 0"
+                         :class="['warning-badge', `warning-${price.warningLevel}`]">
+                        {{ price.warningReason }}
+                    </div>
+                </td>
+                <td>
+                    <button class="buy-btn" @click="goToBuy(price)">去购买</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 智能推荐 -->
+    <div class="recommend-section" v-if="recommendations.length > 0">
+        <h2 class="section-title">💡 智能推荐</h2>
+        <div class="recommend-list">
+            <div class="recommend-card" v-for="item in recommendations" :key="item.id">
+                <div class="recommend-image">
+                    <img :src="item.image" :alt="item.name">
+                </div>
+                <div class="recommend-content">
+                    <div class="recommend-name">{{ item.name }}</div>
+                    <div class="recommend-price">¥{{ item.price }}</div>
+                    <div class="recommend-reason">{{ item.reason }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 优惠建议 -->
+    <div class="suggestion-section" v-if="suggestions.length > 0">
+        <h2 class="section-title">💡 购买建议</h2>
+        <ul class="suggestion-list">
+            <li v-for="(suggestion, index) in suggestions" :key="index">
+                ✅ {{ suggestion }}
+            </li>
+        </ul>
+    </div>
+
+    <!-- 底部功能区 -->
+    <div class="footer-section">
+        <button class="refresh-btn" @click="refreshPrice">
+            🔄 刷新价格
+        </button>
+        <div class="update-time">
+            数据更新时间：{{ updateTime }}
+        </div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                product: {
+                    id: 1,
+                    name: '黄焖鸡米饭',
+                    description: '正在加载...',
+                    image: '',
+                    tags: [],
+                    popularity: 0
+                },
+                priceList: [],
+                bestChoice: null,
+                lowestPrice: 0,
+                hasWarning: false,
+                warningMessage: '',
+                recommendations: [],
+                suggestions: [],
+                updateTime: '--:--',
+                isLoading: false
+            };
+        },
+        computed: {
+            // 计算是否有最佳选择
+            hasBestChoice() {
+                return this.bestChoice !== null;
+            }
+        },
+        methods: {
+            // 获取平台Logo
+            getPlatformLogo(platform) {
+                const logos = {
+                    'meituan': 'https://p0.meituan.net/scarlett/05e5e2c87c1bb1d0c5f6a0a8c5f5a1a1.png',
+                    'eleme': 'https://fuss10.elemecdn.com/e/5b/3b0b8a5a0c5b5a5b5a5b5a5b5a5b5a5b.png',
+                    'jd': 'https://img12.360buyimg.com/img/jfs/t1/113857/33/2038/1000/5ea0b8c1E6c8f5b5d/5b5a5b5a5b5a5b5a.png'
+                };
+                return logos[platform] || 'https://via.placeholder.com/40';
+            },
+
+            // 返回首页
+            goBack() {
+                window.location.href = '/';
+            },
+
+            // 跳转到购买页面
+            goToBuy(price) {
+                if (price.platform === 'meituan') {
+                    window.open('https://waimai.meituan.com/', '_blank');
+                } else if (price.platform === 'eleme') {
+                    window.open('https://www.ele.me/', '_blank');
+                } else if (price.platform === 'jd') {
+                    window.open('https://daojia.jd.com/', '_blank');
+                }
+            },
+
+            // 刷新价格
+            refreshPrice() {
+                this.isLoading = true;
+                this.$message.success('正在刷新价格...');
+
+                axios.post(`/priceplatform/api/price/refresh/${this.product.id}`)
+                    .then(response => {
+                        if (response.data.code === 200) {
+                            this.$message.success('价格刷新成功');
+                            this.loadPriceDetail();
+                        } else {
+                            this.$message.error(response.data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('刷新价格失败:', error);
+                        this.$message.error('刷新失败，请稍后重试');
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    });
+            },
+
+            // 加载比价详情
+            loadPriceDetail() {
+                const productId = this.getProductIdFromUrl();
+                this.product.id = productId;
+
+                axios.get(`/priceplatform/api/price/detail/${productId}`)
+                    .then(response => {
+                        if (response.data.code === 200) {
+                            const data = response.data.data;
+                            this.updateProductData(data);
+                        } else {
+                            this.$message.error(response.data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('加载比价详情失败:', error);
+                        this.$message.error('加载失败，请检查网络连接');
+                    });
+            },
+
+            // 从URL获取商品ID
+            getProductIdFromUrl() {
+                const path = window.location.pathname;
+                const match = path.match(/\/price\/detail\/(\d+)/);
+                return match ? parseInt(match[1]) : 1;
+            },
+
+            // 更新商品数据
+            updateProductData(data) {
+                this.product.name = data.productName;
+                this.product.description = data.productDescription;
+                this.product.image = data.productImage;
+                this.product.tags = data.tags ? data.tags.split(',') : [];
+                this.product.popularity = data.popularity || 0;
+
+                this.priceList = data.priceList || [];
+                this.bestChoice = data.bestChoice;
+                this.lowestPrice = data.lowestPrice || 0;
+                this.hasWarning = data.hasWarning || false;
+                this.warningMessage = data.warningMessage || '';
+                this.recommendations = data.recommendations || [];
+                this.suggestions = data.suggestions || [];
+
+                // 更新当前时间
+                this.updateTime = new Date().toLocaleTimeString('zh-CN', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+        },
+        mounted() {
+            this.loadPriceDetail();
+        }
+    });
+</script>
+</body>
+</html>
