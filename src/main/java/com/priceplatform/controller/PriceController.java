@@ -60,6 +60,7 @@ public class PriceController {
      * GET /api/price/hot
      */
     @GetMapping("/hot")
+    @ResponseBody
     public PriceResponse<List<Product>> getHotProducts(
             @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
         try {
@@ -75,6 +76,7 @@ public class PriceController {
      * GET /api/price/search
      */
     @GetMapping("/search")
+    @ResponseBody
     public PriceResponse<List<Product>> searchProducts(@RequestParam("keyword") String keyword) {
         try {
             if (keyword == null || keyword.trim().isEmpty()) {
@@ -93,6 +95,7 @@ public class PriceController {
      * GET /api/price/trend/{productId}/{platform}
      */
     @GetMapping("/trend/{productId}/{platform}")
+    @ResponseBody
     public PriceResponse<Map<String, Object>> getPriceTrend(
             @PathVariable("productId") Long productId,
             @PathVariable("platform") String platform,
@@ -110,6 +113,7 @@ public class PriceController {
      * GET /api/price/best-plan/{productId}
      */
     @GetMapping("/best-plan/{productId}")
+    @ResponseBody
     public PriceResponse<Map<String, Object>> getBestPlan(@PathVariable("productId") Long productId) {
         try {
             Map<String, Object> bestPlan = priceService.calculateBestPlan(productId);
@@ -124,6 +128,7 @@ public class PriceController {
      * POST /api/price/save
      */
     @PostMapping("/save")
+    @ResponseBody
     public PriceResponse<String> savePrice(@RequestBody Map<String, Object> priceData) {
         try {
             return PriceResponse.success("价格保存成功");
@@ -137,6 +142,7 @@ public class PriceController {
      * GET /api/price/compare/{productId}
      */
     @GetMapping("/compare/{productId}")
+    @ResponseBody
     public PriceResponse<Map<String, Object>> compareAllPrices(@PathVariable("productId") Long productId) {
         try {
             PriceCompareDTO priceDetail = priceService.getPriceDetail(productId);
@@ -161,6 +167,7 @@ public class PriceController {
      * GET /api/price/health
      */
     @GetMapping("/health")
+    @ResponseBody
     public PriceResponse<Map<String, String>> healthCheck() {
         Map<String, String> healthInfo = new HashMap<>();
         healthInfo.put("status", "UP");

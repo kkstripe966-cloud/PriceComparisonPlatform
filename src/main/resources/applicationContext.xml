@@ -11,13 +11,13 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- 组件扫描 -->
+    <!-- 1. 组件扫描（包含DAO层） -->
     <context:component-scan base-package="com.priceplatform">
         <context:exclude-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!-- 数据源配置 -->
+    <!-- 2. 配置数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
@@ -29,29 +29,27 @@
         <property name="maxActive" value="20"/>
     </bean>
 
-    <!-- 事务管理器 -->
+    <!-- 3. 配置事务管理器 -->
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- 开启注解事务 -->
+    <!-- 4. 开启注解事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!-- MyBatis SqlSessionFactory -->
+    <!-- 5. MyBatis SqlSessionFactory（简化配置，用于注解方式） -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
         <property name="typeAliasesPackage" value="com.priceplatform.entity"/>
         <property name="configuration">
             <bean class="org.apache.ibatis.session.Configuration">
-                <!-- 启用驼峰命名转换：数据库current_price → 实体类currentPrice -->
                 <property name="mapUnderscoreToCamelCase" value="true"/>
             </bean>
         </property>
     </bean>
 
-    <!-- MyBatis Mapper扫描 -->
+    <!-- 6. MyBatis Mapper接口注册（关键！） -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.priceplatform.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
