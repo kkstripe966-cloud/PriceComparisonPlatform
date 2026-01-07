@@ -11,7 +11,7 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 扫描Controller -->
-    <context:component-scan base-package="com.todayeatapp.controller"/>
+    <context:component-scan base-package="com.todayeatapp.home.controller"/>
 
     <!-- MVC注解驱动 -->
     <mvc:annotation-driven />
