@@ -10,11 +10,30 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- 扫描Controller -->
-    <context:component-scan base-package="com.todayeatapp.home.controller"/>
+    <!-- 扫描所有Controller（合并两个模块的包） -->
+    <context:component-scan base-package="com.todayeatapp.home.controller,com.todayeatapp.auth.controller,com.todayeatapp.price.controller"/>
 
     <!-- MVC注解驱动 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 静态资源处理 -->
     <mvc:default-servlet-handler/>
@@ -26,12 +45,12 @@
         <property name="contentType" value="text/html;charset=UTF-8"/>
     </bean>
 
-    <!-- 跨域配置（正确版本） -->
+    <!-- 跨域配置（支持前端5173端口） -->
     <mvc:cors>
         <mvc:mapping path="/api/**"
                      allowed-origin-patterns="http://localhost:5173,http://192.168.1.103:5173"
                      allowed-methods="GET,POST,PUT,DELETE,OPTIONS"
-                     allowed-headers="*"
+                     allowed-headers="Content-Type,Authorization,X-Requested-With,Accept,Origin"
                      allow-credentials="true"
                      max-age="3600"/>
     </mvc:cors>

@@ -7,7 +7,7 @@
 
     <display-name>今天吃什么Pro - 外卖比价平台</display-name>
 
-    <!-- Spring配置 -->
+    <!-- Spring配置 - 加载所有Spring配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring-context.xml</param-value>
@@ -52,9 +52,23 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!-- 跨域过滤器（如果已创建CorsFilter类） -->
+    <!--
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>com.todayeatapp.filter.CorsFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    -->
+
     <!-- 默认首页 -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
 </web-app>

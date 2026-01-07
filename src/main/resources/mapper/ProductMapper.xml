@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.priceplatform.dao.ProductMapper">
+
+    <!-- 商品结果映射 -->
+    <resultMap id="productMap" type="com.priceplatform.entity.Product">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="category" column="category"/>
+        <result property="tags" column="tags"/>
+        <result property="popularity" column="popularity"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!-- 平台价格结果映射 -->
+    <resultMap id="platformPriceMap" type="com.priceplatform.entity.PlatformPrice">
+        <id property="id" column="id"/>
+        <result property="productId" column="product_id"/>
+        <result property="platform" column="platform"/>
+        <result property="platformName" column="platform_name"/>
+        <result property="originalPrice" column="original_price"/>
+        <result property="currentPrice" column="current_price"/>
+        <result property="discount" column="discount"/>
+        <result property="couponInfo" column="coupon_info"/>
+        <result property="deliveryFee" column="delivery_fee"/>
+        <result property="minOrder" column="min_order"/>
+        <result property="rating" column="rating"/>
+        <result property="salesMonth" column="sales_month"/>
+        <result property="warningLevel" column="warning_level"/>
+        <result property="warningReason" column="warning_reason"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!-- 价格历史结果映射 -->
+    <resultMap id="priceHistoryMap" type="com.priceplatform.entity.PriceHistory">
+        <id property="id" column="id"/>
+        <result property="platformPriceId" column="platform_price_id"/>
+        <result property="price" column="price"/>
+        <result property="changeType" column="change_type"/>
+        <result property="changePercent" column="change_percent"/>
+        <result property="recordTime" column="record_time"/>
+    </resultMap>
+
+    <!-- 复杂查询：获取商品详情及价格 -->
+    <select id="getProductDetailWithPrices" resultMap="productMap" parameterType="Long">
+        SELECT p.*,
+               MIN(pp.current_price) as min_price,
+               (SELECT platform FROM platform_price WHERE product_id = p.id
+                ORDER BY current_price ASC LIMIT 1) as min_price_platform
+        FROM product p
+            LEFT JOIN platform_price pp ON p.id = pp.product_id
+        WHERE p.id = #{productId} AND p.status = 1
+        GROUP BY p.id
+    </select>
+
+    <!-- 获取价格趋势数据 -->
+    <select id="getPriceTrend" parameterType="Map" resultType="Map">
+        SELECT
+            DATE(record_time) as date,
+            AVG(price) as avg_price,
+            MIN(price) as min_price,
+            MAX(price) as max_price
+        FROM price_history ph
+            JOIN platform_price pp ON ph.platform_price_id = pp.id
+        WHERE pp.product_id = #{productId}
+          AND pp.platform = #{platform}
+          AND ph.record_time >= DATE_SUB(NOW(), INTERVAL #{days} DAY)
+        GROUP BY DATE(record_time)
+        ORDER BY date
+    </select>
+
+</mapper>
