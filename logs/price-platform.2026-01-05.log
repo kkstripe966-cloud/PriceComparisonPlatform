@@ -1,0 +1,640 @@
+2026-01-05 16:01:20 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-01-05 16:01:20 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'priceServiceImpl': Unsatisfied dependency expressed through field 'productMapper'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.priceplatform.dao.ProductMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2026-01-05 16:01:20 [localhost-startStop-1] ERROR o.s.web.context.ContextLoader - Context initialization failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'priceServiceImpl': Unsatisfied dependency expressed through field 'productMapper'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.priceplatform.dao.ProductMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:713)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:693)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:408)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:921)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:399)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:278)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.priceplatform.dao.ProductMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1801)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1357)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:710)
+	... 25 common frames omitted
+2026-01-05 16:09:26 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-01-05 16:09:27 [localhost-startStop-1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2026-01-05 16:09:27 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 1171 ms
+2026-01-05 16:09:27 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcher'
+2026-01-05 16:09:27 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 452 ms
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.dao.ProductMapper.getProductById - ==>  Preparing: SELECT * FROM product WHERE id = ? AND status = 1
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.dao.ProductMapper.getProductById - ==> Parameters: 1(Long)
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.dao.ProductMapper.getProductById - <==      Total: 1
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.d.P.getSimilarProducts - ==>  Preparing: SELECT p.*, MIN(pp.current_price) as minPrice FROM product p LEFT JOIN platform_price pp ON p.id = pp.product_id WHERE p.category = (SELECT category FROM product WHERE id = ?) AND p.id != ? AND p.status = 1 GROUP BY p.id ORDER BY p.popularity DESC LIMIT ?
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.d.P.getSimilarProducts - ==> Parameters: 1(Long), 1(Long), 3(Integer)
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.d.P.getSimilarProducts - <==      Total: 1
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 2(Long)
+2026-01-05 16:09:37 [http-bio-8081-exec-1] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 2
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.dao.ProductMapper.getProductById - ==>  Preparing: SELECT * FROM product WHERE id = ? AND status = 1
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.dao.ProductMapper.getProductById - ==> Parameters: 1(Long)
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.dao.ProductMapper.getProductById - <==      Total: 1
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.d.P.getSimilarProducts - ==>  Preparing: SELECT p.*, MIN(pp.current_price) as minPrice FROM product p LEFT JOIN platform_price pp ON p.id = pp.product_id WHERE p.category = (SELECT category FROM product WHERE id = ?) AND p.id != ? AND p.status = 1 GROUP BY p.id ORDER BY p.popularity DESC LIMIT ?
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.d.P.getSimilarProducts - ==> Parameters: 1(Long), 1(Long), 3(Integer)
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.d.P.getSimilarProducts - <==      Total: 1
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 2(Long)
+2026-01-05 16:11:39 [http-bio-8081-exec-6] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 2
+2026-01-05 16:11:59 [http-bio-8081-exec-7] DEBUG c.p.dao.ProductMapper.getHotProducts - ==>  Preparing: SELECT * FROM product WHERE status = 1 ORDER BY popularity DESC LIMIT ?
+2026-01-05 16:11:59 [http-bio-8081-exec-7] DEBUG c.p.dao.ProductMapper.getHotProducts - ==> Parameters: 10(Integer)
+2026-01-05 16:11:59 [http-bio-8081-exec-7] DEBUG c.p.dao.ProductMapper.getHotProducts - <==      Total: 3
+2026-01-05 16:12:15 [http-bio-8081-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2026-01-05 16:12:20 [http-bio-8081-exec-9] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.dao.ProductMapper.getProductById - ==>  Preparing: SELECT * FROM product WHERE id = ? AND status = 1
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.dao.ProductMapper.getProductById - ==> Parameters: 1(Long)
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.dao.ProductMapper.getProductById - <==      Total: 1
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.d.P.getSimilarProducts - ==>  Preparing: SELECT p.*, MIN(pp.current_price) as minPrice FROM product p LEFT JOIN platform_price pp ON p.id = pp.product_id WHERE p.category = (SELECT category FROM product WHERE id = ?) AND p.id != ? AND p.status = 1 GROUP BY p.id ORDER BY p.popularity DESC LIMIT ?
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.d.P.getSimilarProducts - ==> Parameters: 1(Long), 1(Long), 3(Integer)
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.d.P.getSimilarProducts - <==      Total: 1
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 2(Long)
+2026-01-05 16:15:23 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 2
+2026-01-05 16:15:32 [http-bio-8081-exec-2] DEBUG c.p.dao.ProductMapper.getHotProducts - ==>  Preparing: SELECT * FROM product WHERE status = 1 ORDER BY popularity DESC LIMIT ?
+2026-01-05 16:15:32 [http-bio-8081-exec-2] DEBUG c.p.dao.ProductMapper.getHotProducts - ==> Parameters: 10(Integer)
+2026-01-05 16:15:32 [http-bio-8081-exec-2] DEBUG c.p.dao.ProductMapper.getHotProducts - <==      Total: 3
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.dao.ProductMapper.getProductById - ==>  Preparing: SELECT * FROM product WHERE id = ? AND status = 1
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.dao.ProductMapper.getProductById - ==> Parameters: 1(Long)
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.dao.ProductMapper.getProductById - <==      Total: 1
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.d.P.getSimilarProducts - ==>  Preparing: SELECT p.*, MIN(pp.current_price) as minPrice FROM product p LEFT JOIN platform_price pp ON p.id = pp.product_id WHERE p.category = (SELECT category FROM product WHERE id = ?) AND p.id != ? AND p.status = 1 GROUP BY p.id ORDER BY p.popularity DESC LIMIT ?
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.d.P.getSimilarProducts - ==> Parameters: 1(Long), 1(Long), 3(Integer)
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.d.P.getSimilarProducts - <==      Total: 1
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 2(Long)
+2026-01-05 16:15:56 [http-bio-8081-exec-2] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 2
+2026-01-05 16:22:52 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-01-05 16:22:53 [localhost-startStop-1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2026-01-05 16:22:54 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 1031 ms
+2026-01-05 16:22:54 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcher'
+2026-01-05 16:22:54 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 383 ms
+2026-01-05 16:23:22 [http-bio-8081-exec-3] DEBUG c.p.dao.ProductMapper.getHotProducts - ==>  Preparing: SELECT * FROM product WHERE status = 1 ORDER BY popularity DESC LIMIT ?
+2026-01-05 16:23:22 [http-bio-8081-exec-3] DEBUG c.p.dao.ProductMapper.getHotProducts - ==> Parameters: 10(Integer)
+2026-01-05 16:23:22 [http-bio-8081-exec-3] DEBUG c.p.dao.ProductMapper.getHotProducts - <==      Total: 3
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.dao.ProductMapper.getProductById - ==>  Preparing: SELECT * FROM product WHERE id = ? AND status = 1
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.dao.ProductMapper.getProductById - ==> Parameters: 1(Long)
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.dao.ProductMapper.getProductById - <==      Total: 1
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.d.P.getSimilarProducts - ==>  Preparing: SELECT p.*, MIN(pp.current_price) as minPrice FROM product p LEFT JOIN platform_price pp ON p.id = pp.product_id WHERE p.category = (SELECT category FROM product WHERE id = ?) AND p.id != ? AND p.status = 1 GROUP BY p.id ORDER BY p.popularity DESC LIMIT ?
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.d.P.getSimilarProducts - ==> Parameters: 1(Long), 1(Long), 3(Integer)
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.d.P.getSimilarProducts - <==      Total: 1
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 2(Long)
+2026-01-05 16:23:40 [http-bio-8081-exec-4] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 2
+2026-01-05 16:24:12 [http-bio-8081-exec-5] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: 25.30(BigDecimal), 18.05(BigDecimal), 0.75(BigDecimal), 满25减5+会员券2元(String), 2.00(BigDecimal), 20.00(BigDecimal), 4.80(BigDecimal), 15000(Integer), 0(Integer), null, 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==>  Preparing: INSERT INTO price_history (platform_price_id, price, change_type, change_percent) VALUES (?, ?, ?, ?)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==> Parameters: 1(Long), 18.05(BigDecimal), down(String), 3.9900(BigDecimal)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: 25.30(BigDecimal), 18.05(BigDecimal), 0.75(BigDecimal), 满25减5+会员券2元(String), 2.00(BigDecimal), 20.00(BigDecimal), 4.80(BigDecimal), 15000(Integer), 0(Integer), null, 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: null, 18.32(BigDecimal), null, null, 2.00(BigDecimal), null, null, null, 0(Integer), null, 6(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==>  Preparing: INSERT INTO price_history (platform_price_id, price, change_type, change_percent) VALUES (?, ?, ?, ?)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==> Parameters: 6(Long), 18.32(BigDecimal), down(String), 2.5500(BigDecimal)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: null, 18.32(BigDecimal), null, null, 2.00(BigDecimal), null, null, null, 0(Integer), null, 6(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: 24.90(BigDecimal), 19.96(BigDecimal), 0.82(BigDecimal), 新用户立减5元(String), 3.00(BigDecimal), 25.00(BigDecimal), 4.70(BigDecimal), 12000(Integer), 0(Integer), null, 2(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==>  Preparing: INSERT INTO price_history (platform_price_id, price, change_type, change_percent) VALUES (?, ?, ?, ?)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==> Parameters: 2(Long), 19.96(BigDecimal), down(String), 2.6300(BigDecimal)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: 24.90(BigDecimal), 19.96(BigDecimal), 0.82(BigDecimal), 新用户立减5元(String), 3.00(BigDecimal), 25.00(BigDecimal), 4.70(BigDecimal), 12000(Integer), 0(Integer), null, 2(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: null, 20.96(BigDecimal), null, null, 3.00(BigDecimal), null, null, null, 0(Integer), null, 7(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==>  Preparing: INSERT INTO price_history (platform_price_id, price, change_type, change_percent) VALUES (?, ?, ?, ?)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==> Parameters: 7(Long), 20.96(BigDecimal), up(String), 2.2400(BigDecimal)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: null, 20.96(BigDecimal), null, null, 3.00(BigDecimal), null, null, null, 0(Integer), null, 7(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: 30.00(BigDecimal), 24.22(BigDecimal), 0.82(BigDecimal), PLUS会员专享(String), 5.00(BigDecimal), 30.00(BigDecimal), 4.50(BigDecimal), 8000(Integer), 0(Integer), null, 3(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==>  Preparing: INSERT INTO price_history (platform_price_id, price, change_type, change_percent) VALUES (?, ?, ?, ?)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==> Parameters: 3(Long), 24.22(BigDecimal), down(String), 1.1400(BigDecimal)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: 30.00(BigDecimal), 24.22(BigDecimal), 0.82(BigDecimal), PLUS会员专享(String), 5.00(BigDecimal), 30.00(BigDecimal), 4.50(BigDecimal), 8000(Integer), 1(Integer), 价格比平均高 15.3%，请谨慎购买(String), 3(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: null, 23.60(BigDecimal), null, null, 5.00(BigDecimal), null, null, null, 0(Integer), null, 8(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==>  Preparing: INSERT INTO price_history (platform_price_id, price, change_type, change_percent) VALUES (?, ?, ?, ?)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - ==> Parameters: 8(Long), 23.60(BigDecimal), down(String), 3.6700(BigDecimal)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.insertPriceHistory - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==>  Preparing: UPDATE platform_price SET original_price = ?, current_price = ?, discount = ?, coupon_info = ?, delivery_fee = ?, min_order = ?, rating = ?, sales_month = ?, warning_level = ?, warning_reason = ? WHERE id = ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - ==> Parameters: null, 23.60(BigDecimal), null, null, 5.00(BigDecimal), null, null, null, 0(Integer), null, 8(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.updatePrice - <==    Updates: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.getProductById - ==>  Preparing: SELECT * FROM product WHERE id = ? AND status = 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.getProductById - ==> Parameters: 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.dao.ProductMapper.getProductById - <==      Total: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 1(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 6
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getSimilarProducts - ==>  Preparing: SELECT p.*, MIN(pp.current_price) as minPrice FROM product p LEFT JOIN platform_price pp ON p.id = pp.product_id WHERE p.category = (SELECT category FROM product WHERE id = ?) AND p.id != ? AND p.status = 1 GROUP BY p.id ORDER BY p.popularity DESC LIMIT ?
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getSimilarProducts - ==> Parameters: 1(Long), 1(Long), 3(Integer)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getSimilarProducts - <==      Total: 1
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==>  Preparing: SELECT * FROM platform_price WHERE product_id = ? ORDER BY current_price ASC
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - ==> Parameters: 2(Long)
+2026-01-05 16:28:30 [http-bio-8081-exec-9] DEBUG c.p.d.P.getPricesByProductId - <==      Total: 2
+2026-01-05 21:28:31 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-01-05 21:28:31 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Invalid bean definition with name 'dataSource' defined in class path resource [spring-context.xml]: Could not resolve placeholder 'spring.datasource.url' in value "${spring.datasource.url}"; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.datasource.url' in value "${spring.datasource.url}"
+2026-01-05 21:28:31 [localhost-startStop-1] ERROR o.s.web.context.ContextLoader - Context initialization failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Invalid bean definition with name 'dataSource' defined in class path resource [spring-context.xml]: Could not resolve placeholder 'spring.datasource.url' in value "${spring.datasource.url}"; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.datasource.url' in value "${spring.datasource.url}"
+	at org.springframework.beans.factory.config.PlaceholderConfigurerSupport.doProcessProperties(PlaceholderConfigurerSupport.java:230)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.processProperties(PropertySourcesPlaceholderConfigurer.java:198)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:173)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:325)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:183)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:748)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:399)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:278)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.datasource.url' in value "${spring.datasource.url}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191)
+	at org.springframework.beans.factory.config.BeanDefinitionVisitor.resolveStringValue(BeanDefinitionVisitor.java:296)
+	at org.springframework.beans.factory.config.BeanDefinitionVisitor.resolveValue(BeanDefinitionVisitor.java:217)
+	at org.springframework.beans.factory.config.BeanDefinitionVisitor.visitPropertyValues(BeanDefinitionVisitor.java:147)
+	at org.springframework.beans.factory.config.BeanDefinitionVisitor.visitBeanDefinition(BeanDefinitionVisitor.java:85)
+	at org.springframework.beans.factory.config.PlaceholderConfigurerSupport.doProcessProperties(PlaceholderConfigurerSupport.java:227)
+	... 18 common frames omitted
+2026-01-05 21:35:21 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-01-05 21:35:21 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.config.internalAutoProxyCreator': Initialization of bean failed; nested exception is java.lang.NoClassDefFoundError: org/aspectj/lang/annotation/Pointcut
+2026-01-05 21:35:21 [localhost-startStop-1] ERROR o.s.web.context.ContextLoader - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.aop.config.internalAutoProxyCreator': Initialization of bean failed; nested exception is java.lang.NoClassDefFoundError: org/aspectj/lang/annotation/Pointcut
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:628)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.registerBeanPostProcessors(PostProcessorRegistrationDelegate.java:258)
+	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:764)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:567)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:399)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:278)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.NoClassDefFoundError: org/aspectj/lang/annotation/Pointcut
+	at org.springframework.aop.aspectj.annotation.AbstractAspectJAdvisorFactory.<clinit>(AbstractAspectJAdvisorFactory.java:62)
+	at org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator.initBeanFactory(AnnotationAwareAspectJAutoProxyCreator.java:82)
+	at org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator.setBeanFactory(AbstractAdvisorAutoProxyCreator.java:65)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeAwareMethods(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1791)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	... 20 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.aspectj.lang.annotation.Pointcut
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1547)
+	... 26 common frames omitted
+2026-01-05 21:39:28 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-01-05 21:39:29 [localhost-startStop-1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2026-01-05 21:39:29 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 1460 ms
+2026-01-05 21:39:29 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcher'
+2026-01-05 21:39:30 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+2026-01-05 21:39:30 [localhost-startStop-1] ERROR o.s.web.servlet.DispatcherServlet - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1302)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:702)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:716)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:591)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:530)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:170)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1088)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5176)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5460)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:485)
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:321)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:267)
+	... 30 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: org/apache/commons/fileupload/FileItemFactory
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3578)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2676)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:467)
+	... 32 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.apache.commons.fileupload.FileItemFactory
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1547)
+	... 36 common frames omitted
+2026-01-05 21:41:04 [http-bio-8081-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcher'
+2026-01-05 21:41:04 [http-bio-8081-exec-3] WARN  o.s.w.c.s.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+2026-01-05 21:41:04 [http-bio-8081-exec-3] ERROR o.s.web.servlet.DispatcherServlet - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1302)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:702)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:716)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:591)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:530)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:170)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:865)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:136)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:485)
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:321)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:267)
+	... 35 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: org/apache/commons/fileupload/FileItemFactory
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3578)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2676)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:467)
+	... 37 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.apache.commons.fileupload.FileItemFactory
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1547)
+	... 41 common frames omitted
+2026-01-05 21:41:08 [http-bio-8081-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcher'
+2026-01-05 21:41:09 [http-bio-8081-exec-2] WARN  o.s.w.c.s.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+2026-01-05 21:41:09 [http-bio-8081-exec-2] ERROR o.s.web.servlet.DispatcherServlet - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1302)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:702)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:716)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:591)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:530)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:170)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:865)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:136)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:485)
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:321)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:267)
+	... 35 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: org/apache/commons/fileupload/FileItemFactory
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3578)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2676)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:467)
+	... 37 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.apache.commons.fileupload.FileItemFactory
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1547)
+	... 41 common frames omitted
+2026-01-05 21:41:11 [http-bio-8081-exec-4] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcher'
+2026-01-05 21:41:11 [http-bio-8081-exec-4] WARN  o.s.w.c.s.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+2026-01-05 21:41:11 [http-bio-8081-exec-4] ERROR o.s.web.servlet.DispatcherServlet - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1302)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:702)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:716)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:591)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:530)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:170)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:865)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:136)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:485)
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:321)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:267)
+	... 35 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: org/apache/commons/fileupload/FileItemFactory
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3578)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2676)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:467)
+	... 37 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.apache.commons.fileupload.FileItemFactory
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1547)
+	... 41 common frames omitted
+2026-01-05 21:41:30 [http-bio-8081-exec-7] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcher'
+2026-01-05 21:41:30 [http-bio-8081-exec-7] WARN  o.s.w.c.s.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+2026-01-05 21:41:30 [http-bio-8081-exec-7] ERROR o.s.web.servlet.DispatcherServlet - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'multipartResolver': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1302)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:702)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:716)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:591)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:530)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:170)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:865)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:136)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [org.springframework.web.multipart.commons.CommonsMultipartResolver] from ClassLoader [WebappClassLoader
+  context: 
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@4aa298b7]
+]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:485)
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:321)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:267)
+	... 35 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: org/apache/commons/fileupload/FileItemFactory
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3578)
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2676)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:467)
+	... 37 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.apache.commons.fileupload.FileItemFactory
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1547)
+	... 41 common frames omitted

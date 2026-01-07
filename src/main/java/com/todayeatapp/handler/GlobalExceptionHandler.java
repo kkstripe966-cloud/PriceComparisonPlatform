@@ -1,4 +1,4 @@
-package com.todayeatapp.controller.handler;
+package com.todayeatapp.home.controller.handler;
 
 import com.todayeatapp.common.ApiResponse;
 import org.slf4j.Logger;
