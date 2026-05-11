@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.todayeatapp.mapper.DishMapper">
+<mapper namespace="com.todayeatapp.home.mapper.DishMapper">
 
-    <resultMap id="DishMap" type="com.todayeatapp.entity.Dish">
+    <resultMap id="DishMap" type="com.todayeatapp.home.entity.Dish">
         <id property="dishId" column="dish_id"/>
         <result property="dishName" column="dish_name"/>
         <result property="description" column="description"/>

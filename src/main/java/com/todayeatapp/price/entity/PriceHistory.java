@@ -1,4 +1,4 @@
-package com.priceplatform.entity;
+package com.todayeatapp.price.entity;
 
 import lombok.Data;
 import java.math.BigDecimal;

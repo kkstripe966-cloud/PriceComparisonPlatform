@@ -1,6 +1,8 @@
-package com.priceplatform;
+package com.todayeatapp.auth;
 
-import com.priceplatform.config.AppConfig;
+// 注释掉Java配置，使用web.xml配置
+/*
+import com.todayeatapp.auth.config.AppConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class Application extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -20,3 +22,4 @@ public class Application extends AbstractAnnotationConfigDispatcherServletInitia
         return new String[] { "/" };
     }
 }
+*/

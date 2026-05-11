@@ -1,13 +1,13 @@
-package com.priceplatform.service.impl;
+package com.todayeatapp.auth.service.impl;
 
-import com.priceplatform.dao.UserMapper;
-import com.priceplatform.dao.VerificationCodeMapper;
-import com.priceplatform.entity.User;
-import com.priceplatform.entity.VerificationCode;
-import com.priceplatform.service.UserService;
-import com.priceplatform.util.JwtUtil;
-import com.priceplatform.util.ValidateUtil;
-import com.priceplatform.service.EmailService;
+import com.todayeatapp.auth.dao.UserMapper;
+import com.todayeatapp.auth.dao.VerificationCodeMapper;
+import com.todayeatapp.auth.entity.User;
+import com.todayeatapp.auth.entity.VerificationCode;
+import com.todayeatapp.auth.service.UserService;
+import com.todayeatapp.auth.util.JwtUtil;
+import com.todayeatapp.auth.util.ValidateUtil;
+import com.todayeatapp.auth.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

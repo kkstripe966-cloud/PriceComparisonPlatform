@@ -1,4 +1,4 @@
-package com.priceplatform.dto;
+package com.todayeatapp.price.dto;
 
 import lombok.Data;
 import java.math.BigDecimal;

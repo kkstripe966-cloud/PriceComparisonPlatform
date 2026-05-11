@@ -10,8 +10,8 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- 扫描所有Controller（合并两个模块的包） -->
-    <context:component-scan base-package="com.todayeatapp.home.controller,com.todayeatapp.auth.controller,com.todayeatapp.price.controller"/>
+    <!-- 扫描所有Controller（合并所有模块的包） -->
+    <context:component-scan base-package="com.todayeatapp.home.controller,com.todayeatapp.auth.controller,com.todayeatapp.price.controller,com.todayeatapp.blindbox"/>
 
     <!-- MVC注解驱动 -->
     <mvc:annotation-driven>

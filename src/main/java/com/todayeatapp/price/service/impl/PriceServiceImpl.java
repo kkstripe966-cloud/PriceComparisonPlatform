@@ -1,12 +1,12 @@
-package com.priceplatform.service.impl;
+package com.todayeatapp.price.service.impl;
 
-import com.priceplatform.dto.PriceCompareDTO;
-import com.priceplatform.entity.PlatformPrice;
-import com.priceplatform.entity.PriceHistory;
-import com.priceplatform.entity.Product;
-import com.priceplatform.dao.ProductMapper;
-import com.priceplatform.service.PriceService;
-import com.priceplatform.util.PriceUtil;
+import com.todayeatapp.price.dto.PriceCompareDTO;
+import com.todayeatapp.price.entity.PlatformPrice;
+import com.todayeatapp.price.entity.PriceHistory;
+import com.todayeatapp.price.entity.Product;
+import com.todayeatapp.price.dao.ProductMapper;
+import com.todayeatapp.price.service.PriceService;
+import com.todayeatapp.price.util.PriceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

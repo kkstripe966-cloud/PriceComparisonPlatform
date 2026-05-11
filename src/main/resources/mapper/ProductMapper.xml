@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.priceplatform.dao.ProductMapper">
+<mapper namespace="com.todayeatapp.price.dao.ProductMapper">
 
     <!-- 商品结果映射 -->
-    <resultMap id="productMap" type="com.priceplatform.entity.Product">
+    <resultMap id="productMap" type="com.todayeatapp.price.entity.Product">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
@@ -19,7 +19,7 @@
     </resultMap>
 
     <!-- 平台价格结果映射 -->
-    <resultMap id="platformPriceMap" type="com.priceplatform.entity.PlatformPrice">
+    <resultMap id="platformPriceMap" type="com.todayeatapp.price.entity.PlatformPrice">
         <id property="id" column="id"/>
         <result property="productId" column="product_id"/>
         <result property="platform" column="platform"/>
@@ -38,7 +38,7 @@
     </resultMap>
 
     <!-- 价格历史结果映射 -->
-    <resultMap id="priceHistoryMap" type="com.priceplatform.entity.PriceHistory">
+    <resultMap id="priceHistoryMap" type="com.todayeatapp.price.entity.PriceHistory">
         <id property="id" column="id"/>
         <result property="platformPriceId" column="platform_price_id"/>
         <result property="price" column="price"/>

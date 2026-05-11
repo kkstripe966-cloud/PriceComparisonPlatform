@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.priceplatform.dao.VerificationCodeMapper">
+<mapper namespace="com.todayeatapp.auth.dao.VerificationCodeMapper">
 
     <!-- 插入验证码 -->
-    <insert id="insert" parameterType="com.priceplatform.entity.VerificationCode"
+    <insert id="insert" parameterType="com.todayeatapp.auth.entity.VerificationCode"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO verification_code (
             account, code, type, expire_time, is_used
@@ -14,7 +14,7 @@
     </insert>
 
     <!-- 根据账号和类型查询最新的验证码 -->
-    <select id="selectLatestByAccountAndType" resultType="com.priceplatform.entity.VerificationCode">
+    <select id="selectLatestByAccountAndType" resultType="com.todayeatapp.auth.entity.VerificationCode">
         SELECT
             id,
             account,

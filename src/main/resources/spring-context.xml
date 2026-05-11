@@ -19,15 +19,12 @@
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!-- 加载配置文件 -->
-<!--    <context:property-placeholder location="classpath:application.yml"/>-->
-
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
-        <property name="url" value="jdbc:mysql://localhost:3306/price_comparison?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai"/>
-        <property name="username" value="root"/>
-        <property name="password" value="wff13377072928"/>
+        <property name="url" value="jdbc:mysql://47.108.164.85:3306/coldchain?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai"/>
+        <property name="username" value="coldchain"/>
+        <property name="password" value="DDwHWz67sMWFyWkA"/>
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="initialSize" value="5"/>
         <property name="minIdle" value="5"/>
@@ -43,11 +40,13 @@
         <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
     </bean>
 
-    <!-- MyBatis SqlSessionFactory -->
+    <!-- MyBatis SqlSessionFactory（整合所有模块） -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <!-- 扫描所有模块的Mapper XML -->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
-        <property name="typeAliasesPackage" value="com.todayeatapp.entity"/>
+        <!-- 扫描所有模块的实体类 -->
+        <property name="typeAliasesPackage" value="com.todayeatapp.home.entity,com.todayeatapp.auth.entity,com.todayeatapp.price.entity"/>
         <property name="configuration">
             <bean class="org.apache.ibatis.session.Configuration">
                 <property name="mapUnderscoreToCamelCase" value="true"/>
@@ -58,9 +57,10 @@
         </property>
     </bean>
 
-    <!-- MyBatis Mapper扫描 -->
+    <!-- MyBatis Mapper扫描（整合所有模块） -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.todayeatapp.mapper"/>
+        <!-- 扫描所有模块的Mapper接口 -->
+        <property name="basePackage" value="com.todayeatapp.home.mapper,com.todayeatapp.auth.dao,com.todayeatapp.price.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

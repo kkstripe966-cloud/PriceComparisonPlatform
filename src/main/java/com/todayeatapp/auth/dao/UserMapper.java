@@ -1,6 +1,6 @@
-package com.priceplatform.dao;
+package com.todayeatapp.auth.dao;
 
-import com.priceplatform.entity.User;
+import com.todayeatapp.auth.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

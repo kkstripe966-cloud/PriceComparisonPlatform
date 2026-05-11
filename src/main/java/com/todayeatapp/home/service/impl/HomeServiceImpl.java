@@ -1,11 +1,11 @@
-package com.todayeatapp.service.impl;
+package com.todayeatapp.home.service.impl;
 
-import com.todayeatapp.entity.Category;
-import com.todayeatapp.entity.Dish;
-import com.todayeatapp.entity.vo.HomePageVO;
-import com.todayeatapp.mapper.CategoryMapper;
-import com.todayeatapp.mapper.DishMapper;
-import com.todayeatapp.service.HomeService;
+import com.todayeatapp.home.entity.Category;
+import com.todayeatapp.home.entity.Dish;
+import com.todayeatapp.home.entity.vo.HomePageVO;
+import com.todayeatapp.home.mapper.CategoryMapper;
+import com.todayeatapp.home.mapper.DishMapper;
+import com.todayeatapp.home.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -142,6 +142,13 @@ public class HomeServiceImpl implements HomeService {
         if (dishId != null) {
             dishMapper.incrementCompareCount(dishId);
         }
+    }
+
+    @Override
+    public List<Dish> getAllDishes() {
+        List<Dish> dishes = dishMapper.selectAllDishes();
+        processTags(dishes);
+        return dishes;
     }
 
     /**

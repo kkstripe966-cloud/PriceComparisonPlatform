@@ -1,8 +1,8 @@
-package com.priceplatform.dao;
+package com.todayeatapp.price.dao;
 
-import com.priceplatform.entity.Product;
-import com.priceplatform.entity.PlatformPrice;
-import com.priceplatform.entity.PriceHistory;
+import com.todayeatapp.price.entity.Product;
+import com.todayeatapp.price.entity.PlatformPrice;
+import com.todayeatapp.price.entity.PriceHistory;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

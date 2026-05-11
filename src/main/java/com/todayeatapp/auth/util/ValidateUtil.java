@@ -1,4 +1,4 @@
-package com.priceplatform.util;
+package com.todayeatapp.auth.util;
 
 import java.util.regex.Pattern;
 

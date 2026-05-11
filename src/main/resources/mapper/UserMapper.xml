@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.priceplatform.dao.UserMapper">
+<mapper namespace="com.todayeatapp.auth.dao.UserMapper">
 
     <!-- 检查手机号是否已存在 -->
     <select id="existsByPhone" resultType="boolean">
@@ -14,14 +14,14 @@
     </select>
 
     <!-- 插入新用户 -->
-    <insert id="insert" parameterType="com.priceplatform.entity.User"
+    <insert id="insert" parameterType="com.todayeatapp.auth.entity.User"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user (phone, email, password, nickname, avatar, status, last_login_time)
         VALUES (#{phone}, #{email}, #{password}, #{nickname}, #{avatar}, #{status}, #{lastLoginTime})
     </insert>
 
     <!-- 根据ID查询用户 -->
-    <select id="selectById" resultType="com.priceplatform.entity.User">
+    <select id="selectById" resultType="com.todayeatapp.auth.entity.User">
         SELECT id, phone, email, password, nickname, avatar, status,
                last_login_time as lastLoginTime,
                create_time as createTime,
@@ -30,7 +30,7 @@
     </select>
 
     <!-- 根据手机号查询用户 -->
-    <select id="selectByPhone" resultType="com.priceplatform.entity.User">
+    <select id="selectByPhone" resultType="com.todayeatapp.auth.entity.User">
         SELECT id, phone, email, password, nickname, avatar, status,
                last_login_time as lastLoginTime,
                create_time as createTime,
@@ -39,7 +39,7 @@
     </select>
 
     <!-- 根据邮箱查询用户 -->
-    <select id="selectByEmail" resultType="com.priceplatform.entity.User">
+    <select id="selectByEmail" resultType="com.todayeatapp.auth.entity.User">
         SELECT id, phone, email, password, nickname, avatar, status,
                last_login_time as lastLoginTime,
                create_time as createTime,
@@ -48,7 +48,7 @@
     </select>
 
     <!-- 根据手机号或邮箱查询用户（用于登录） -->
-    <select id="selectByPhoneOrEmail" resultType="com.priceplatform.entity.User">
+    <select id="selectByPhoneOrEmail" resultType="com.todayeatapp.auth.entity.User">
         SELECT id, phone, email, password, nickname, avatar, status,
                last_login_time as lastLoginTime,
                create_time as createTime,
@@ -57,7 +57,7 @@
     </select>
 
     <!-- 更新用户信息 -->
-    <update id="update" parameterType="com.priceplatform.entity.User">
+    <update id="update" parameterType="com.todayeatapp.auth.entity.User">
         UPDATE user
         <set>
             <if test="phone != null">phone = #{phone},</if>

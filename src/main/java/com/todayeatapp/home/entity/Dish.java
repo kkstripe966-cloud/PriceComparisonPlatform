@@ -1,4 +1,4 @@
-package com.todayeatapp.entity;
+package com.todayeatapp.home.entity;
 
 import lombok.Data;
 import java.math.BigDecimal;

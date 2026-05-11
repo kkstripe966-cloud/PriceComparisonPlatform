@@ -1,6 +1,6 @@
-package com.todayeatapp.mapper;
+package com.todayeatapp.home.mapper;
 
-import com.todayeatapp.entity.Category;
+import com.todayeatapp.home.entity.Category;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

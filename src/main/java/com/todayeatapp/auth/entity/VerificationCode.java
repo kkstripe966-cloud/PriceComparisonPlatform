@@ -1,4 +1,4 @@
-package com.priceplatform.entity;
+package com.todayeatapp.auth.entity;
 
 import lombok.Data;
 import java.util.Date;

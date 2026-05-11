@@ -1,4 +1,4 @@
-package com.priceplatform.service;
+package com.todayeatapp.auth.service;
 
 import java.util.Map;
 

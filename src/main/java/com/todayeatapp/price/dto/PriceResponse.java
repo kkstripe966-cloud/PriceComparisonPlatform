@@ -1,7 +1,6 @@
-package com.priceplatform.dto;
+package com.todayeatapp.price.dto;
 
 import lombok.Data;
-import java.util.List;
 
 @Data
 public class PriceResponse<T> {

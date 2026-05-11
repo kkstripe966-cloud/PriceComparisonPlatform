@@ -1,8 +1,8 @@
-package com.todayeatapp.service;
+package com.todayeatapp.home.service;
 
-import com.todayeatapp.entity.Category;
-import com.todayeatapp.entity.Dish;
-import com.todayeatapp.entity.vo.HomePageVO;
+import com.todayeatapp.home.entity.Category;
+import com.todayeatapp.home.entity.Dish;
+import com.todayeatapp.home.entity.vo.HomePageVO;
 import java.util.List;
 
 public interface HomeService {
@@ -51,4 +51,9 @@ public interface HomeService {
      * 记录比价点击
      */
     void recordCompare(Integer dishId);
+
+    /**
+     * 获取所有菜品（用于盲盒抽取）
+     */
+    List<Dish> getAllDishes();
 }

@@ -1,9 +1,9 @@
-package com.priceplatform.controller;
+package com.todayeatapp.price.controller;
 
-import com.priceplatform.dto.PriceCompareDTO;
-import com.priceplatform.dto.PriceResponse;
-import com.priceplatform.entity.Product;
-import com.priceplatform.service.PriceService;
+import com.todayeatapp.price.dto.PriceCompareDTO;
+import com.todayeatapp.price.dto.PriceResponse;
+import com.todayeatapp.price.entity.Product;
+import com.todayeatapp.price.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

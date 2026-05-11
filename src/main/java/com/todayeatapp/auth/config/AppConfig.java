@@ -1,13 +1,14 @@
-package com.priceplatform.config;
+package com.todayeatapp.auth.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -18,75 +19,82 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
-import com.alibaba.druid.pool.DruidDataSource;
 import javax.sql.DataSource;
 import java.io.IOException;
 
 @Configuration
 @EnableWebMvc
-@EnableTransactionManagement
-@ComponentScan(basePackages = "com.priceplatform")
+@ComponentScan(basePackages = "com.todayeatapp")
 @PropertySource("classpath:application.yml")
-@MapperScan("com.priceplatform.dao")
+@MapperScan({"com.todayeatapp.auth.dao", "com.todayeatapp.home.mapper"})
+@EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private Environment env;
+    // 数据库配置（从application.yml读取）
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
+
+    @Value("${spring.datasource.username}")
+    private String dbUsername;
+
+    @Value("${spring.datasource.password}")
+    private String dbPassword;
+
+    @Value("${spring.datasource.driver-class-name}")
+    private String dbDriverClassName;
+
+    @Value("${spring.datasource.druid.initial-size:5}")
+    private int initialSize;
+
+    @Value("${spring.datasource.druid.min-idle:5}")
+    private int minIdle;
+
+    @Value("${spring.datasource.druid.max-active:20}")
+    private int maxActive;
+
+    @Value("${spring.datasource.druid.max-wait:60000}")
+    private int maxWait;
 
     // 数据源配置
     @Bean
     public DataSource dataSource() {
-        System.out.println("=== 使用硬编码数据库连接 ===");
-
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost:3306/price_comparison?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false");
-        dataSource.setUsername("root");
-        dataSource.setPassword("wff13377072928");  // 根据你的MySQL密码修改
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl(dbUrl);
+        dataSource.setUsername(dbUsername);
+        dataSource.setPassword(dbPassword);
+        dataSource.setDriverClassName(dbDriverClassName);
 
-        dataSource.setInitialSize(5);
-        dataSource.setMinIdle(5);
-        dataSource.setMaxActive(20);
-        dataSource.setMaxWait(60000);
+        dataSource.setInitialSize(initialSize);
+        dataSource.setMinIdle(minIdle);
+        dataSource.setMaxActive(maxActive);
+        dataSource.setMaxWait(maxWait);
         dataSource.setValidationQuery("SELECT 1");
         dataSource.setTestWhileIdle(true);
+        dataSource.setTestOnBorrow(false);
+        dataSource.setTestOnReturn(false);
 
         return dataSource;
     }
 
-    // 辅助方法
-    private int getIntProperty(String key, int defaultValue) {
-        String value = env.getProperty(key);
-        return value != null ? Integer.parseInt(value) : defaultValue;
-    }
-
-    private long getLongProperty(String key, long defaultValue) {
-        String value = env.getProperty(key);
-        return value != null ? Long.parseLong(value) : defaultValue;
-    }
-
-    private boolean getBooleanProperty(String key, boolean defaultValue) {
-        String value = env.getProperty(key);
-        return value != null ? Boolean.parseBoolean(value) : defaultValue;
-    }
-
+    // MyBatis SqlSessionFactory
     @Bean
     public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) throws IOException {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
 
-        // 1. 设置Mapper XML位置
+        // 设置Mapper XML位置（支持多个模块）
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         factoryBean.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
 
-        // 2. 设置实体类包路径
-        factoryBean.setTypeAliasesPackage("com.priceplatform.entity");
+        // 设置实体类包路径（支持多个模块）
+        factoryBean.setTypeAliasesPackage("com.todayeatapp.auth.entity,com.todayeatapp.home.entity");
 
-        // 3. 配置MyBatis设置
+        // 配置MyBatis设置
         org.apache.ibatis.session.Configuration configuration =
                 new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
+        configuration.setUseGeneratedKeys(true);
+        configuration.setUseColumnLabel(true);
         factoryBean.setConfiguration(configuration);
 
         return factoryBean;
@@ -104,16 +112,22 @@ public class AppConfig implements WebMvcConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-    // 文件上传解析器
-    @Bean
-    public StandardServletMultipartResolver multipartResolver() {
-        return new StandardServletMultipartResolver();
+    // 文件上传解析器（使用CommonsMultipartResolver）
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
+        resolver.setMaxUploadSize(10485760); // 10MB
+        resolver.setMaxUploadSizePerFile(1048576); // 1MB
+        return resolver;
     }
 
     // 静态资源配置
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/");
+                .addResourceLocations("classpath:/static/", "file:./static/");
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("classpath:/images/", "file:./images/");
     }
 }

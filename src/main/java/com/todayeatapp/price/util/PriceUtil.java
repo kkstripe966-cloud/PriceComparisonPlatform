@@ -1,13 +1,12 @@
-package com.priceplatform.util;
+package com.todayeatapp.price.util;
 
-import com.priceplatform.entity.PlatformPrice;
-import com.priceplatform.entity.Product;
+import com.todayeatapp.price.entity.PlatformPrice;
+import com.todayeatapp.price.entity.Product;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * 价格计算工具类

@@ -1,6 +1,6 @@
-package com.todayeatapp.mapper;
+package com.todayeatapp.home.mapper;
 
-import com.todayeatapp.entity.Dish;
+import com.todayeatapp.home.entity.Dish;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -119,4 +119,16 @@ public interface DishMapper {
      */
     @Update("UPDATE dish SET compare_count = compare_count + 1 WHERE dish_id = #{dishId}")
     int incrementCompareCount(@Param("dishId") Integer dishId);
+
+    /**
+     * 获取所有菜品（用于盲盒抽取）
+     */
+    @Select("SELECT d.dish_id, d.dish_name, d.main_image, d.min_price, d.avg_price, " +
+            "d.category_id, d.tags, d.is_hot, d.is_recommend, d.view_count, " +
+            "c.category_name " +
+            "FROM dish d " +
+            "LEFT JOIN category c ON d.category_id = c.category_id " +
+            "WHERE d.status = 1 " +
+            "ORDER BY d.create_time DESC")
+    List<Dish> selectAllDishes();
 }

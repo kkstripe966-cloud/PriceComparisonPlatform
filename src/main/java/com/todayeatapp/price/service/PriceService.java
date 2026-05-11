@@ -1,13 +1,11 @@
-package com.priceplatform.service;
+package com.todayeatapp.price.service;
 
-import com.priceplatform.dto.PriceCompareDTO;
-import com.priceplatform.dto.PriceResponse;
-import com.priceplatform.entity.PlatformPrice;
-import com.priceplatform.entity.Product;
-import com.priceplatform.entity.PriceHistory;
+import com.todayeatapp.price.dto.PriceCompareDTO;
+import com.todayeatapp.price.entity.PlatformPrice;
+import com.todayeatapp.price.entity.Product;
+import com.todayeatapp.price.entity.PriceHistory;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 

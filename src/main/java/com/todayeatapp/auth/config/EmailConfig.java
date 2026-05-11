@@ -1,4 +1,4 @@
-package com.priceplatform.config;
+package com.todayeatapp.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

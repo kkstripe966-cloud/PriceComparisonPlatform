@@ -1,7 +1,7 @@
-package com.priceplatform.controller;
+package com.todayeatapp.auth.controller;
 
-import com.priceplatform.service.UserService;
-import com.priceplatform.util.JwtUtil;
+import com.todayeatapp.auth.service.UserService;
+import com.todayeatapp.auth.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.util.StringUtils;
@@ -12,7 +12,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
 
     @Autowired

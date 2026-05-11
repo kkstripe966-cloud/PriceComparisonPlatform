@@ -1,7 +1,7 @@
-package com.todayeatapp.entity.vo;
+package com.todayeatapp.home.entity.vo;
 
-import com.todayeatapp.entity.Category;
-import com.todayeatapp.entity.Dish;
+import com.todayeatapp.home.entity.Category;
+import com.todayeatapp.home.entity.Dish;
 import lombok.Data;
 import java.util.List;
 

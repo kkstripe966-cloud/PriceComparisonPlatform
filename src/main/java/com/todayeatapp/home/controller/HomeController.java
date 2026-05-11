@@ -1,9 +1,9 @@
-package com.todayeatapp.controller;
+package com.todayeatapp.home.controller;
 
-import com.todayeatapp.entity.Category;
-import com.todayeatapp.entity.Dish;
-import com.todayeatapp.entity.vo.HomePageVO;
-import com.todayeatapp.service.HomeService;
+import com.todayeatapp.home.entity.Category;
+import com.todayeatapp.home.entity.Dish;
+import com.todayeatapp.home.entity.vo.HomePageVO;
+import com.todayeatapp.home.service.HomeService;
 import com.todayeatapp.common.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/home")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class HomeController {
 
     @Autowired
